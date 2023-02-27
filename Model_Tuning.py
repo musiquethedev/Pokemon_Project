@@ -199,10 +199,10 @@ def main():
     rfclist = []
     gbtlist = []
     
-    for i in range(50):
+    for i in range(10):
         pokemon_df = load_data()
         X, X_valid, y, y_valid = data_pipeline(pokemon_df, drop_prevos=True,
-                                           kind='minmax', valid_size=0.25)
+                                           kind='minmax', valid_size=0.1)
         
         lr = LogisticRegression(class_weight={0:0.5, 1:1.5}, penalty='l1',
                                 solver='liblinear')
