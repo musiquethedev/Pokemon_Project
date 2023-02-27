@@ -1,12 +1,12 @@
 # Pokemon Viability Analysis and Prediction Project Overview
 
-- Created a machine learning model that predicts whether a pokemon will be competitively viable
-- Scraped over 1000 rows of data from multiple pages on Serebii.net
-- Pulled and transformed additional data from the established open-source Pokemon Battle simulator Pokemon Showdown, through their API and their github
+- Created a machine learning model that predicts whether a Pokemon will be competitively viable
+- Scraped over 1000 rows of data from multiple pages on [Serebii.net](https://serebii.net/)
+- Pulled and transformed additional data from the established open-source Pokemon Battle simulator Pokemon Showdown (via their respective APIs and GitHub repositories)
 - Performed in-depth analysis to understand how features are related and connected with viability
-- Tested Logistic Regression, Decision Tree, Gaussian Naive Bayes, K Nearest Neighbors, Random Forest, Support Vector Machine, and Gradient-Boosted Tree algorithms with Stratified K-Fold Cross Validation to find which models to explore further
-- Optimized Logistic Regression, Decision Tree, Random Forest, and Gradient-Boosted Tree models with Cross-Validated Grid Search to arrive at the best model
-- Analyzed the best model's Permutation Importance, Partial Dependence, and Shapley Values to further understand the connections between the features and viability
+- Tested **Logistic Regression**, **Decision Tree**, **Gaussian Naive Bayes**, **K-Nearest Neighbors**, **Random Forest**, **Support Vector Machine**, and **Gradient-Boosted Tree** algorithms with **Stratified K-Fold Cross Validation** to find which models to explore further
+- Optimized **Logistic Regression**, **Decision Tree**, **Random Forest**, and **Gradient-Boosted Tree** models with **Cross-Validated Grid Search** to arrive at the best model
+- Analyzed the best model's **Permutation Importance**, **Partial Dependence**, and **Shapley Values** to further understand the connections between the features and viability
 
 ## Requirements
 
@@ -108,11 +108,11 @@ However, I also tracked the model's accuracy, precision, and recall.
 Here are the models:
 
 - **Logistic Regression**: Baseline for prediction. Ended up scoring surprisingly well.
-- **Decision Tree**: A typical tree-based model. It served as a baseline for the other tree-based models
-- **Gaussian Naive Bayes**: A simple mathematical model. Because GNB assumes independent features, I was not confident in its predictive power for this problem.
-- **K-Nearest Neighbors**: I thought that a good predictor of a pokemon's viability could be other pokemon similar to it. Interestingly, the KNN model improved significantly with standard scaling as opposed to minmax scaling
-- **Support Vector Machine**: I tried an SVM, but I was skeptical that it could work because in the EDA, it was evident that a lot of unviable pokemon are similar to viable pokemon stat-wise
-- **Gradient-Boosted Tree** (from `sklearn`): Because of the success of the Decision Tree and the Random Forest, I added in a simple Gradient-Boosted Tree, since they're typically powerful right out of the box.
+- **Decision Tree**: A typical tree-based model. It served as a baseline for the other tree-based models.
+- **Gaussian Naive Bayes (GNB)**: A simple mathematical model. Because GNB assumes independent features, I was not confident in its predictive power for this problem.
+- **K-Nearest Neighbors (KNN)**: I thought that a good predictor of a pokemon's viability could be other pokemon similar to it. Interestingly, the **KNN** model improved significantly with standard scaling as opposed to minmax scaling.
+- **Support Vector Machine**: I tried an SVM, but I was skeptical that it could work because in the EDA, it was evident that a lot of unviable pokemon are similar to viable pokemon stat-wise.
+- **Gradient-Boosted Tree** (from `sklearn`): Because of the success of the **Decision Tree** and the **Random Forest**, I added in a simple **Gradient-Boosted Tree**, since they're typically powerful right out of the box.
 
 Before tuning, here are the `f1` scores of the models.
 (`f1` is a measure of the harmonic mean of **Precision** and **Recall** and ranges from `0` to `1`. `f1` scores change slightly with each evaluation):
@@ -121,16 +121,16 @@ Before tuning, here are the `f1` scores of the models.
 | :-----------------: | :-----------: | :---------: | :-----------: | :----------------: | :--------------------: | :-------------------: |
 | 0.643               | 0.632         | 0.571       | 0.690         | 0.472              | 0.575                  | 0.670                 |
 
-It's interesting to note that while nearly all the models had a much higher precision than recall, the Naive Bayes model had the reverse - a very good recall score of `0.702`.
+It's interesting to note that while nearly all the models had a much higher precision than recall, the **Naive Bayes** model had the reverse: a very good recall score of `0.702`.
 
-After running several runs of the StratifiedKFold Cross Validation and finding the mean `f1` score for each model for each run, I decided to continue tuning with the Logistic Regression, Decision Tree, Random Forest, and Gradient-Boosted Tree models, using Cross-Validation Grid Search.
+After running several runs of the **Stratified K-Fold Cross Validation** and finding the mean `f1` score for each model for each run, I decided to continue tuning with the **Logistic Regression**, **Decision Tree**, **Random Forest**, and **Gradient-Boosted Tree** models, using **Cross-Validation Grid Search**.
 Scores post-tuning on validation data:
 
 | Logistic Regression | Decision Tree | Random Forest | Gradient-Boosted Tree |
 | :-----------------: | :-----------: | :-----------: | :-------------------: |
 | 0.769               | 0.700         | 0.800         | 0.737                 |
 
-Ultimately, the Random Forest model outperformed the other models, not only during testing and validation, but also in that it was less likely to be horribly wrong (less variation in f1 scores)
+Ultimately, the **Random Forest** model outperformed the other models, not only during testing and validation, but also in that it was less likely to be horribly wrong (less variation in `f1` scores).
 
 ## Model Analysis
 
@@ -145,20 +145,20 @@ After creating the Random Forest model and training it on the entire dataset, I 
 
 ## Results
 
-Ultimately, I succeeded in creating a model that could semi-reliably predict the viability of a pokemon (the f1 scores of each model were prone to changing across multiple successive runs of StratifiedKFold Cross Validation). However, in collecting data and processing it for the model, I had deliberately omitted several factors:
+Ultimately, I succeeded in creating a model that could semi-reliably predict the viability of a Pokemon (the `f1` scores of each model were prone to changing across multiple successive runs of StratifiedKFold Cross Validation). However, in collecting data and processing it for the model, I had deliberately omitted several factors:
 
-- **Ability**: a pokemon's best ability has a huge impact on its viability. A bad ability can render a great pokemon useless, while an amazing ability can render a terrible pokemon incredibly powerful
-- **Movepool**: some pokemon are not great stat-wise, but have access to amazing moves that allow them to provide great utility or have enormous power.
-- **Context**: The viability of a pokemon is judged within the context of the metagame: the other pokemon it has to play with and against. 
+- **Ability**: a Pokemon's best ability has a huge impact on its viability. A bad ability can render a great Pokemon useless, while an amazing ability can render a terrible Pokemon incredibly powerful
+- **Movepool**: some Pokemon are not great stat-wise, but have access to amazing moves that allow them to provide great utility or have enormous power.
+- **Context**: The viability of a Pokemon is judged within the context of the metagame: the other Pokemon it has to play with and against. 
 
 These factors were omitted for simplicity in data collection and for time reasons. Their omission means that any model, no matter how tuned, will never be able to perfectly predict the viability of pokemon with the given dataset.
-However, the models performed noticeably higher than baseline, meaning that the given data--stats, legendary status, and typing--still plays a significant role in the viability of pokemon.
-This goes against common consensus in the pokemon competitive community, where movepool and abilities are often favored over stats.
+However, the models performed noticeably higher than baseline, meaning that the given data--stats, legendary status, and typing--still plays a significant role in the viability of Pokemon.
+This goes against common consensus in the Pokemon competitive community, where movepool and abilities are often favored over stats.
 
 ## Next Steps
 
 To continue this project further, additional data--such as the missing data mentioned above--could be collected and a new model created that inputs these features. There could also be additional experimentation with different ways to encode the "type" feature.
-Finally, that model could be productionalized into a tool that helps pokemon players easily determine the strength of different pokemon at the start of a generation, when such information is not yet common knowledge.
+Finally, that model could be productionalized into a tool that helps Pokemon players easily determine the strength of different Pokemon at the start of a generation, when such information is not yet common knowledge.
 
 ## Additional Attributions
 
