@@ -1,0 +1,11 @@
+beautifulsoup4
+joblib
+matplotlib
+numpy
+pandas
+requests
+scipy
+scrapy
+seaborn
+scikit-learn
+tqdm
