@@ -117,9 +117,9 @@ Here are the models:
 Before tuning, here are the `f1` scores of the models.
 (`f1` is a measure of the harmonic mean of **Precision** and **Recall** and ranges from `0` to `1`. `f1` scores change slightly with each evaluation):
 
-| Logistic Regression | Decision Tree | Naive Bayes | Random Foreset | K-Nearest Neighbor | Support Vector Machine | Gradient-Boosted Tree |
-| ------------------- | ------------- | ----------- | -------------- | ------------------ | ---------------------- | --------------------- |
-| 0.643               | 0.632         | 0.571       | 0.690          | 0.472              | 0.575                  | 0.670                 |
+| Logistic Regression | Decision Tree | Naive Bayes | Random Forest | K-Nearest Neighbor | Support Vector Machine | Gradient-Boosted Tree |
+| :-----------------: | :-----------: | :---------: | :-----------: | :----------------: | :--------------------: | :-------------------: |
+| 0.643               | 0.632         | 0.571       | 0.690         | 0.472              | 0.575                  | 0.670                 |
 
 It's interesting to note that while nearly all the models had a much higher precision than recall, the Naive Bayes model had the reverse - a very good recall score of `0.702`.
 
@@ -127,7 +127,7 @@ After running several runs of the StratifiedKFold Cross Validation and finding t
 Scores post-tuning on validation data:
 
 | Logistic Regression | Decision Tree | Random Forest | Gradient-Boosted Tree |
-| ------------------- | ------------- | ------------- | --------------------- |
+| :-----------------: | :-----------: | :-----------: | :-------------------: |
 | 0.769               | 0.700         | 0.800         | 0.737                 |
 
 Ultimately, the Random Forest model outperformed the other models, not only during testing and validation, but also in that it was less likely to be horribly wrong (less variation in f1 scores)
