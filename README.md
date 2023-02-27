@@ -1,11 +1,11 @@
 # Pokemon Viability Analysis and Prediction Project Overview
-* Created a machine learning model that predicts whether a pokemon will be competitively viable
-* Scraped over 1000 rows of data from multiple pages on Serebii.net
-* Pulled and transformed additional data from the established open-source Pokemon Battle simulator Pokemon Showdown, through their API and their github
-* Performed in-depth analysis to understand how features are related and connected with viability
-* Tested Logistic Regression, Decision Tree, Gaussian Naive Bayes, K Nearest Neighbors, Random Forest, Support Vector Machine, and Gradient-Boosted Tree algorithms with Stratified K-Fold Cross Validation to find which models to explore further
-* Optimized Logistic Regression, Decision Tree, Random Forest, and Gradient-Boosted Tree models with Cross-Validated Grid Search to arrive at the best model
-* Analyzed the best model's Permutation Importance, Partial Dependence, and Shapley Values to further understand the connections between the features and viability
+* Created a machine learning model that predicts whether a pokemon will be competitively viable.
+* Scraped over 1000 rows of data from multiple pages on Serebii.net.
+* Pulled and transformed additional data from the established open-source pokemon battle simulator Pokemon Showdown, through their API and their github.
+* Performed in-depth analysis to understand how features are related and connected with viability.
+* Tested Logistic Regression, Decision Tree, Gaussian Naive Bayes, K Nearest Neighbors, Random Forest, Support Vector Machine, and Gradient-Boosted Tree algorithms with Stratified K-Fold Cross Validation to find which models to explore further.
+* Optimized Logistic Regression, Decision Tree, Random Forest, and Gradient-Boosted Tree models with Cross-Validated Grid Search to arrive at the best model.
+* Analyzed the best model's Permutation Importance, Partial Dependence, and Shapley Values to further understand the connections between the features and viability.
 
 ## Libraries and Resources Used
 Python Version: 3.9.13
@@ -24,9 +24,9 @@ Serebii.net links that were scraped:
 Github Repo for Pokemon Showdown: https://github.com/smogon/pokemon-showdown
 
 Outside help:
-* My father wrote the tcl script to convert the typescript file form pokemon showdown into json so that it could be easily imported into python
-* ChatGPT for various odds and ends as well as general understanding
-* Readme template by Ken Jee in his github repo "Playing Numbers": https://github.com/PlayingNumbers/ds_salary_proj/blob/master/README.md
+* My father wrote the tcl script to convert the typescript file form pokemon showdown into json so that it could be easily imported into python.
+* ChatGPT for various odds and ends as well as general understanding.
+* Readme template by Ken Jee in his github repo "Playing Numbers": https://github.com/PlayingNumbers/ds_salary_proj/blob/master/README.md.
 ## Web Scraping
 ```Scraping_and_Wrangling.ipynb```
 
@@ -79,13 +79,13 @@ I tried 7 different models and evaluated them using f1 score. I used f1 score be
 
 Here are the models:
 * Logistic Regression: Baseline for prediction. Ended up scoring surprisingly well.
-* Decision Tree: A typical tree-based model. It served as a baseline for the other tree-based models
+* Decision Tree: A typical tree-based model. It served as a baseline for the other tree-based models.
 * Gaussian Naive Bayes: A simple mathematical model. Because GNB assumes independent features, I was not confident in its predictive power for this problem.
-* K Nearest Neighbors: I thought that a good predictor of a pokemon's viability could be other pokemon similar to it. Interestingly, the KNN model improved significantly with standard scaling as opposed to minmax scaling
-* Support Vector Machine: I tried an SVM, but I was skeptical that it could work because in the EDA, it was evident that a lot of unviable pokemon are similar to viable pokemon stat-wise
+* K Nearest Neighbors: I thought that a good predictor of a pokemon's viability could be other pokemon similar to it. Interestingly, the KNN model improved significantly with standard scaling as opposed to minmax scaling.
+* Support Vector Machine: I tried an SVM, but I was skeptical that it could work because in the EDA, it was evident that a lot of unviable pokemon are similar to viable pokemon stat-wise.
 * Gradient-Boosted Tree (from sklearn): Because of the success of the Decision Tree and the Random Forest, I added in a simple Gradient-Boosted Tree, since they're typically powerful right out of the box.
 
-Before tuning, here are the f1 scores of the models (f1 is a measure of the harmonic mean of Precision and Recall, and ranges from 0 to 1) (f1 scores change slightly with each evaluation):
+Before tuning, here are the f1 scores of the models (f1 is a measure of the harmonic mean of Precision and Recall that ranges from 0 to 1. They also change slightly with each evaluation):
 * Logistic Regression: 0.643
 * Decision Tree: 0.632
 * Naive Bayes: 0.571
@@ -102,7 +102,7 @@ Scores post-tuning on validation data:
 * Random Forest: 0.800
 * Gradient-Boosted Tree: 0.737
 
-Ultimately, the Random Forest model performed better than the other models, not only during testing and validation, but also in that it was less likely to be horribly wrong (less variation in f1 scores)
+Ultimately, the Random Forest model performed better than the other models, not only during testing and validation, but also in that it was less likely to be horribly wrong (less variation in f1 scores).
 
 ## Model Analysis
 ```Model_Analysis.ipynb```
@@ -116,7 +116,7 @@ After creating the Random Forest model and training it on the entire dataset, I 
 
 ## Results
 Ultimately, I succeeded in creating a model that could semi-reliably predict the viability of a pokemon (the f1 scores of each model were prone to changing across multiple successive runs of StratifiedKFold Cross Validation). However, in collecting data and processing it for the model, I had deliberately omitted several factors:
-* Ability: a pokemon's best ability has a huge impact on its viability. A bad ability can render a great pokemon useless, while an amazing ability can render a terrible pokemon incredibly powerful
+* Ability: a pokemon's best ability has a huge impact on its viability. A bad ability can render a great pokemon useless, while an amazing ability can render a terrible pokemon incredibly powerful.
 * Movepool: some pokemon are not great stat-wise, but have access to amazing moves that allow them to provide great utility or have enormous power.
 * Context: The viability of a pokemon is judged within the context of the metagame: the other pokemon it has to play with and against. 
 
@@ -125,6 +125,6 @@ However, the models performed noticeably higher than baseline, meaning that the 
 This goes against common consensus in the pokemon competitive community, where movepool and abilities are often favored over stats.
 
 ## Next Steps
-To continue this project further, additional data--such as the missing data mentioned above--could be collected and a new model created that inputs these features. There could also be additional experimentation with different ways to encode the "type" feature.
+To continue this project further, additional data--such as the missing data mentioned above--can be collected and implemented into a new model which considers these features.
 Finally, that model could be productionalized into a tool that helps pokemon players easily determine the strength of different pokemon at the start of a generation, when such information is not yet common knowledge.
 
