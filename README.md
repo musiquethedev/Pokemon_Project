@@ -124,6 +124,7 @@ Before tuning, here are the `f1` scores of the models.
 It's interesting to note that while nearly all the models had a much higher precision than recall, the **Naive Bayes** model had the reverse: a very good recall score of `0.702`.
 
 After running several runs of the **Stratified K-Fold Cross Validation** and finding the mean `f1` score for each model for each run, I decided to continue tuning with the **Logistic Regression**, **Decision Tree**, **Random Forest**, and **Gradient-Boosted Tree** models, using **Cross-Validation Grid Search**.
+
 Scores post-tuning on validation data:
 
 | Logistic Regression | Decision Tree | Random Forest | Gradient-Boosted Tree |
